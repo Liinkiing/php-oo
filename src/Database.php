@@ -62,7 +62,7 @@ trait Findable {
         unset($arr[1]);
         unset($arr[2]);
         $cName = "App\\Model\\" . implode($arr);
-        $tName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', $cName));
+        $tName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', implode($arr)));
         $query = "SELECT * FROM t_$tName ORDER BY '$order'";
         $stmt = $db->query($query);
         $stmt->execute();
