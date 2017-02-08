@@ -54,6 +54,12 @@ class Database {
 
 trait Findable {
 
+
+
+    /**
+     * @param string $order
+     * @return array
+     */
     public static function findAll($order = "DESC") {
         $db = Database::getInstance()->getDatabase();
         $arr = preg_split('/(?=[A-Z])/', __CLASS__);
@@ -100,6 +106,38 @@ trait Findable {
         }
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_CLASS, $cName);
+    }
 
+    /**
+     * @param $critera
+     * @param string $order
+     * @return mixed[]
+     */
+    public static function findOneBy($critera, $order = "DESC") {
+        $db = Database::getInstance()->getDatabase();
+        $arr = preg_split('/(?=[A-Z])/', __CLASS__);
+        array_pop($arr);
+        unset($arr[0]);
+        unset($arr[1]);
+        unset($arr[2]);
+        $cName = "App\\Model\\" . implode($arr);
+        $tName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', implode($arr)));
+        $query = "SELECT * FROM t_$tName ";
+        if(count($critera) > 0) {
+            $query .= "WHERE ";
+            $i = 0;
+            foreach ($critera as $key => $value) {
+                $query .= "$key = :$key ";
+                if($i < count($critera) - 1) { $query .= "AND "; }
+                $i++;
+            }
+        }
+        $query .= "ORDER BY '$order'";
+        $stmt = $db->prepare($query);
+        foreach ($critera as $key => $value) {
+            $stmt->bindValue(":$key", $value);
+        }
+        $stmt->execute();
+        return $stmt->fetchObject($cName);
     }
 }

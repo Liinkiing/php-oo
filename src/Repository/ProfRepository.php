@@ -18,6 +18,4 @@ class ProfRepository
 {
     use Findable;
 
-
-
 }
