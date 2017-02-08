@@ -1,0 +1,10 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Composer template
+composer.phar
+/vendor/
+/app/config.yml
+
+# composer.lock
+
+### IDEA Projet Settings
+/.idea/

@@ -1,0 +1,17 @@
+{
+    "name": "linking/cp-autoload",
+    "authors": [
+        {
+            "name": "Omar Jbara",
+            "email": "omar.Jbara2@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "require": {
+        "symfony/yaml": "^3.2"
+    }
+}
