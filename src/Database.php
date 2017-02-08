@@ -46,7 +46,7 @@ class Database {
     public function useConfig($configPath) {
         echo "Utilisation du fichier '" . realpath($configPath) . "' pour la configuration<br>";
         $this->config = Yaml::parse(file_get_contents($configPath))['Database'];
-        $this->db = new \PDO("mysql:host=" . $this->config['host'] . ";dbname=" . $this->config['name'], $this->config['user'], $this->config['pass'],
+        $this->db = new \PDO("mysql:host=" . $this->config['host'] . ";dbname=" . $this->config['name'], $this->config['username'], $this->config['password'],
             [\PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"]);
     }
 
