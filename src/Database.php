@@ -54,7 +54,27 @@ class Database {
 
 trait Findable {
 
+    private static function getClassName() {
+        $arr = preg_split('/(?=[A-Z])/', __CLASS__);
+        array_pop($arr);
+        unset($arr[0]);
+        unset($arr[1]);
+        unset($arr[2]);
+        return "App\\Model\\" . implode($arr);
+    }
 
+    private static function getTableName() {
+        return strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', explode("\\", self::getClassName())[2]));
+    }
+
+    public static function find($id) {
+        $db = Database::getInstance()->getDatabase();
+        $cName = self::getClassName();
+        $tName = self::getTableName();
+        $stmt = $db->query("SELECT * FROM t_$tName WHERE id_$tName = $id");
+        $stmt->execute();
+        return $stmt->fetchObject($cName);
+    }
 
     /**
      * @param string $order
@@ -62,13 +82,8 @@ trait Findable {
      */
     public static function findAll($order = "DESC") {
         $db = Database::getInstance()->getDatabase();
-        $arr = preg_split('/(?=[A-Z])/', __CLASS__);
-        array_pop($arr);
-        unset($arr[0]);
-        unset($arr[1]);
-        unset($arr[2]);
-        $cName = "App\\Model\\" . implode($arr);
-        $tName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', implode($arr)));
+        $cName = self::getClassName();
+        $tName = self::getTableName();
         $query = "SELECT * FROM t_$tName ORDER BY '$order'";
         $stmt = $db->query($query);
         $stmt->execute();
@@ -82,13 +97,8 @@ trait Findable {
      */
     public static function findBy($critera, $order = "DESC") {
         $db = Database::getInstance()->getDatabase();
-        $arr = preg_split('/(?=[A-Z])/', __CLASS__);
-        array_pop($arr);
-        unset($arr[0]);
-        unset($arr[1]);
-        unset($arr[2]);
-        $cName = "App\\Model\\" . implode($arr);
-        $tName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', implode($arr)));
+        $cName = self::getClassName();
+        $tName = self::getTableName();
         $query = "SELECT * FROM t_$tName ";
         if(count($critera) > 0) {
             $query .= "WHERE ";
@@ -115,13 +125,8 @@ trait Findable {
      */
     public static function findOneBy($critera, $order = "DESC") {
         $db = Database::getInstance()->getDatabase();
-        $arr = preg_split('/(?=[A-Z])/', __CLASS__);
-        array_pop($arr);
-        unset($arr[0]);
-        unset($arr[1]);
-        unset($arr[2]);
-        $cName = "App\\Model\\" . implode($arr);
-        $tName = strtolower(preg_replace('/(?<!^)[A-Z]/', '_$0', implode($arr)));
+        $cName = self::getClassName();
+        $tName = self::getTableName();
         $query = "SELECT * FROM t_$tName ";
         if(count($critera) > 0) {
             $query .= "WHERE ";

@@ -11,8 +11,8 @@ require_once '../vendor/autoload.php';
 $db = Database::getInstance();
 $db->useConfig('../app/config.yml');
 
-$responsables = \App\Repository\ResponsableRepository::findOneBy(['nom_responsable' => "Lamoureux"]);
-var_dump($responsables);
+$responsable = \App\Repository\ResponsableRepository::find(1);
+var_dump($responsable);
 
 
 
