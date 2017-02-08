@@ -11,7 +11,7 @@ namespace App\Model;
 
 class Responsable {
 
-    private $id_reponsable;
+    private $id_responsable;
     private $responsabilite;
     private $courriel_responsable;
     private $prenom_responsable;
@@ -20,18 +20,18 @@ class Responsable {
     /**
      * @return mixed
      */
-    public function getIdReponsable()
+    public function getIdResponsable()
     {
-        return $this->id_reponsable;
+        return $this->id_responsable;
     }
 
     /**
-     * @param mixed $id_reponsable
+     * @param mixed $id_responsable
      * @return Responsable
      */
-    public function setIdReponsable($id_reponsable)
+    public function setIdResponsable($id_responsable)
     {
-        $this->id_reponsable = $id_reponsable;
+        $this->id_responsable = $id_responsable;
         return $this;
     }
 

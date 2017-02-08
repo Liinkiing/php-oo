@@ -71,7 +71,19 @@ trait Findable {
         $db = Database::getInstance()->getDatabase();
         $cName = self::getClassName();
         $tName = self::getTableName();
-        $stmt = $db->query("SELECT * FROM t_$tName WHERE id_$tName = $id");
+        $id_field = 'id_' . $tName;
+        switch ($tName) {
+            case 'temoignage_professionnel':
+                $id_field = 'id_temoignage';
+                break;
+            case 'evenement':
+                $id_field = 'id_actualite';
+                break;
+            case 'usager_admin':
+                $id_field = 'nom_usager_admin';
+                break;
+        }
+        $stmt = $db->query("SELECT * FROM t_$tName WHERE $id_field = $id");
         $stmt->execute();
         return $stmt->fetchObject($cName);
     }
