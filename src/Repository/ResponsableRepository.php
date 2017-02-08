@@ -11,13 +11,11 @@ namespace App\Repository;
 
 use App\Database;
 use App\Findable;
-use App\Model\Evenement;
+use App\Model\Prof;
 use PDO;
 
-class EvenementRepository
+class ResponsableRepository
 {
     use Findable;
-
-
 
 }

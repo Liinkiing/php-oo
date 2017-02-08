@@ -19,18 +19,6 @@ class CoursRepository
 
     use Findable;
 
-    /**
-     * Return a complete list of all courses
-     * @param string $order
-     * @return Cours[]
-     */
-    public static function getAllCours($order = "DESC")
-    {
-        $db = Database::getInstance()->getDatabase();
-        return $db->query("SELECT * 
-                           FROM t_cours
-                           ORDER BY '$order'")->fetchAll(PDO::FETCH_CLASS, Cours::class);
-    }
 
     /**
      * @param Cours $cours
