@@ -111,7 +111,7 @@ trait Findable {
     /**
      * @param $critera
      * @param string $order
-     * @return mixed[]
+     * @return mixed
      */
     public static function findOneBy($critera, $order = "DESC") {
         $db = Database::getInstance()->getDatabase();
