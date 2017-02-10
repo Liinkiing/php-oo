@@ -16,10 +16,5 @@ use PDO;
 
 class DiplomeRepository
 {
-
     use Findable;
-
-
-
-
 }
