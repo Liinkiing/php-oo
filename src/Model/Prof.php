@@ -25,7 +25,7 @@ class Prof {
     /**
      * @return mixed
      */
-    public function getIdProf()
+    public function getId()
     {
         return $this->id_prof;
     }

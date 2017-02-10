@@ -10,6 +10,7 @@ namespace App\Repository;
 
 
 use App\Database;
+use App\Editable;
 use App\Findable;
 use App\Model\Prof;
 use PDO;
@@ -17,5 +18,5 @@ use PDO;
 class ProfRepository
 {
     use Findable;
-
+    use Editable;
 }

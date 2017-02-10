@@ -25,7 +25,7 @@ class ProjetDiplome {
     /**
      * @return mixed
      */
-    public function getIdProjet()
+    public function getId()
     {
         return $this->id_projet;
     }

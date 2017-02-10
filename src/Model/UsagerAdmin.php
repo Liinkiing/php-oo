@@ -18,7 +18,7 @@ class UsagerAdmin {
     /**
      * @return mixed
      */
-    public function getNomUsagerAdmin()
+    public function getId()
     {
         return $this->nom_usager_admin;
     }

@@ -20,7 +20,7 @@ class Texte {
     /**
      * @return mixed
      */
-    public function getIdTexte()
+    public function getId()
     {
         return $this->id_texte;
     }

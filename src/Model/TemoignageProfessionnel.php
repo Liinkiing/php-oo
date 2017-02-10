@@ -22,7 +22,7 @@ class TemoignageProfessionnel {
     /**
      * @return mixed
      */
-    public function getIdTemoignage()
+    public function getId()
     {
         return $this->id_temoignage;
     }

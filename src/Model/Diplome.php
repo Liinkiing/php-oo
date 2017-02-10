@@ -31,7 +31,7 @@ class Diplome
     /**
      * @return int
      */
-    public function getIdDiplome()
+    public function getId()
     {
         return $this->id_diplome;
     }
@@ -58,6 +58,13 @@ class Diplome
     public function getPrenomDiplome()
     {
         return $this->prenom_diplome;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFullName() {
+        return $this->prenom_diplome . ' ' . $this->nom_diplome;
     }
 
     /**

@@ -1,6 +1,7 @@
 <?php
 
 namespace App;
+use App\Model\Diplome;
 use Symfony\Component\Yaml\Yaml;
 
 
@@ -19,10 +20,10 @@ class Database {
      */
     public static function getInstance() {
         if(is_null(self::$instance)) {
-            echo "Création d'une nouvelle instance<br>";
+//            echo "Création d'une nouvelle instance<br>";
             self::$instance = new Database();
         }
-        echo "Utilisation d'une instance déjà créée (" . spl_object_hash(self::$instance) . ")<br>";
+//        echo "Utilisation d'une instance déjà créée (" . spl_object_hash(self::$instance) . ")<br>";
         return self::$instance;
     }
 
@@ -216,4 +217,45 @@ trait Findable {
     }
 
 
+}
+
+trait Editable {
+
+    public static function edit(&$entity, $parameters) {
+        try {
+            $db = Database::getInstance()->getDatabase();
+            $tName = self::getTableName();
+            $id_field = 'id_' . $tName;
+            switch ($tName) {
+                case 'temoignage_professionnel':
+                    $id_field = 'id_temoignage';
+                    break;
+                case 'evenement':
+                    $id_field = 'id_actualite';
+                    break;
+                case 'usager_admin':
+                    $id_field = 'nom_usager_admin';
+                    break;
+            }
+            $query = "UPDATE t_$tName SET ";
+            $i = 0;
+            $db->beginTransaction();
+            foreach ($parameters as $key => $value) {
+                if($i < count($parameters) - 1) $query .= $key . " = :$key, ";
+                else $query .= $key . " = :$key ";
+                $i++;
+            }
+            $query .= "WHERE $id_field = " . $entity->getId() . ";";
+            $stmt = $db->prepare($query);
+            foreach ($parameters as $key => $value) {
+                $stmt->bindValue(":$key", $value);
+            }
+            $stmt->execute();
+            $db->commit();
+            header('Location: ' . $_SERVER['PHP_SELF'] . '?id=' . $entity->getId());
+            die();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
 }

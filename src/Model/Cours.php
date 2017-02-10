@@ -27,7 +27,7 @@ class Cours {
     /**
      * @return int
      */
-    public function getIdCours()
+    public function getId()
     {
         return $this->id_cours;
     }
@@ -93,7 +93,7 @@ class Cours {
      */
     public function getEstSpecifique()
     {
-        return $this->est_specifique;
+        return ($this->est_specifique === "1") ? true : false;
     }
 
     /**

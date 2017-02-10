@@ -20,7 +20,7 @@ class Responsable {
     /**
      * @return mixed
      */
-    public function getIdResponsable()
+    public function getId()
     {
         return $this->id_responsable;
     }

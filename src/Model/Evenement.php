@@ -23,7 +23,7 @@ class Evenement {
     /**
      * @return int
      */
-    public function getIdActualite()
+    public function getId()
     {
         return $this->id_actualite;
     }

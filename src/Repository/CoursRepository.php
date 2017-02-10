@@ -10,6 +10,7 @@ namespace App\Repository;
 
 
 use App\Database;
+use App\Editable;
 use App\Findable;
 use App\Model\Cours;
 use PDO;
@@ -18,6 +19,7 @@ class CoursRepository
 {
 
     use Findable;
+    use Editable;
 
     /**
      * Exemple d'une custom fonction utilisé dans le Repository permettant l'ajout d'un nouveau cours.

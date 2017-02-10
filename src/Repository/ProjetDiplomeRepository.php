@@ -10,6 +10,7 @@ namespace App\Repository;
 
 
 use App\Database;
+use App\Editable;
 use App\Findable;
 use App\Model\Diplome;
 use App\Model\Prof;
@@ -20,6 +21,7 @@ class ProjetDiplomeRepository
 {
 
     use Findable;
+    use Editable;
 
     /**
      * @param Diplome $student
