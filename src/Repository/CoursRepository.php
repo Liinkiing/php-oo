@@ -24,7 +24,7 @@ class CoursRepository
      * @param Cours $cours
      * @throws \Exception
      */
-    public static function addCours(Cours $cours)
+    public static function insert(Cours $cours)
     {
         $db = Database::getInstance()->getDatabase();
         $db->beginTransaction();
