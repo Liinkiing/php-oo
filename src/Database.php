@@ -83,8 +83,8 @@ trait Findable {
                 $id_field = 'nom_usager_admin';
                 break;
         }
-        $stmt = $db->query("SELECT * FROM t_$tName WHERE $id_field = $id");
-        $stmt->execute();
+        $stmt = $db->prepare("SELECT * FROM t_$tName WHERE $id_field = ?");
+        $stmt->execute([$id]);
         return $stmt->fetchObject($cName);
     }
 
