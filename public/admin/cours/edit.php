@@ -11,12 +11,14 @@ $db = Database::getInstance();
 if($_SERVER['REQUEST_METHOD'] === 'GET') {
     if(!isset($_GET['id'])) throw new Exception("Aucun ID spécifié");
     $id = $_GET['id'];
+
     /** @var \App\Model\Cours $cours */
     $cours = CoursRepository::find($id);
     if(!$cours) throw new Exception("Cours non trouvé");
 } else {
     if(!isset($_GET['id'])) throw new Exception("Aucun ID spécifié");
     $id = $_GET['id'];
+
     /** @var \App\Model\Cours $cours */
     $cours = CoursRepository::find($id);
     CoursRepository::edit($cours, $_POST);

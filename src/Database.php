@@ -258,4 +258,37 @@ trait Editable {
             throw $ex;
         }
     }
+
+    public static function add($parameters) {
+        try {
+            $db = Database::getInstance()->getDatabase();
+            $tName = self::getTableName();
+            $query = "INSERT INTO t_$tName (";
+            $i = 0;
+            $db->beginTransaction();
+            foreach ($parameters as $key => $value) {
+                if($i < count($parameters) - 1) $query .= "$key, ";
+                else $query .= "$key) ";
+                $i++;
+            }
+            $query .= "VALUES (";
+            $i = 0;
+            foreach ($parameters as $key => $value) {
+                if($i < count($parameters) - 1) $query .= ":$key, ";
+                else $query .= ":$key) ";
+                $i++;
+            }
+            $stmt = $db->prepare($query);
+            foreach ($parameters as $key => $value) {
+                $stmt->bindValue(":$key", $value);
+            }
+            $stmt->execute();
+            $db->commit();
+            header('Location: /');
+            die();
+        } catch (\Exception $ex) {
+            throw $ex;
+        }
+    }
+
 }
